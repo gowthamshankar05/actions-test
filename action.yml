@@ -1,20 +1,31 @@
-name: "My JavaScript Action"
-description: "A sample GitHub Action written in JavaScript"
-author: "Your Name"
+name: 'Download Asset from GitHub Release'
+description: 'Downloads a specific asset from a GitHub release and saves it to a specified directory.'
 inputs:
-  my-input:
-    description: "An input parameter for the action"
+  repo:
+    description: 'Repository to fetch the release from (e.g., org/repo-name).'
     required: true
-    default: "default-value"
-
+    type: string
+  release_tag:
+    description: 'The release tag to download from (e.g., v1.0.0).'
+    required: true
+    type: string
+  asset_name:
+    description: 'The name of the asset to download (e.g., myfile.zip).'
+    required: true
+    type: string
+  github_token:
+    description: 'GitHub token with access to the repository.'
+    required: true
+    type: string
+  download_path:
+    description: 'Directory where the asset should be downloaded.'
+    required: false
+    default: './'
+    type: string
 outputs:
-  my-output:
-    description: "An output from the action"
-
+  downloaded_file:
+    description: 'The path to the downloaded file.'
+    value: ${{ steps.download.outputs.downloaded_file }}
 runs:
-  using: "node16"
-  main: "dist/index.js"
-
-branding:
-  color: "blue"
-  icon: "zap"
+  using: 'node16'
+  main: 'index.js'
